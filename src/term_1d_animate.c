@@ -1,5 +1,6 @@
 #include<stdio.h>
-#include<time.h>
+#include<sys/time.h>
+#include<sys/types.h>
 #include<unistd.h>
 
 #include "term_1d_animate.h"
