@@ -55,6 +55,35 @@ void calculate_destinations(Cell *space, Collision *collision)
   }
 }
 
+// should be done once for each board at init;
+// stores the index of each active particle's
+// closest neighbour in the positive direction
+void calculate_neighbours(Cell *space)
+{
+  int j = 0;
+  for (int i=0; i < SIZE; i++) {
+    if (space[i].on) {
+      Cell *p = &(space[i]);
+
+      // find next active particle
+      j = i + 1;
+      Cell c = space[j];
+      while ( !c.on && j < SIZE) {
+        j++;
+        c = space[j];
+      }
+
+      // leave as -1 if no particle found
+      if (j < SIZE) {
+        p->posNeighbour = j;
+      }
+
+      // increment to next active particle
+      i = j - 1;
+    }
+  }
+}
+
 // the default setup for an empty cell
 void nullify(Cell *space, int i)
 {

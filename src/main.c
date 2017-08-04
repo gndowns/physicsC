@@ -66,6 +66,8 @@ int main(int argc, char **argv) {
     create_particles(space);
   }
 
+  calculate_neighbours(space);
+
   char orientation = isHorizontalFlag ? 'r' : 'u';
   animate(space, orientation);
 

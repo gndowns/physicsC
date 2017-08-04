@@ -17,6 +17,7 @@ typedef struct Collision {
 
 Cell* time_step(Cell *);
 void calculate_destinations(Cell *, Collision *);
+void calculate_neighbours(Cell *);
 void nullify(Cell *, int);
 
 extern int SIZE;
