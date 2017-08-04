@@ -6,7 +6,6 @@ typedef struct Cell {
   int v;
   int a;
   int dest;
-  int negNeighbour;
   int posNeighbour;
 } Cell;
 
@@ -17,8 +16,7 @@ typedef struct Collision {
 } Collision;
 
 Cell* time_step(Cell *);
-void calculate_nbhds(Cell *, Collision *);
-void resolve_collision(Cell *, Collision);
+void calculate_destinations(Cell *, Collision *);
 void nullify(Cell *, int);
 
 extern int SIZE;

@@ -11,9 +11,7 @@ Cell* time_step(Cell *space)
     -1
   };
 
-  calculate_nbhds(space, &first_collision);
-
-  resolve_collision(space, first_collision);
+  calculate_destinations(space, &first_collision);
 
   // move particles (copy to out array w/ new positions)
   // init
@@ -25,8 +23,6 @@ Cell* time_step(Cell *space)
   for (int i=0; i < SIZE; i++) {
     Cell p = space[i];
     if (p.dest != -1) {
-      p.negCalculated = 0;
-      p.posCalculated = 0;
       out[p.dest] = p;
       out[p.dest].dest = -1;
     }
@@ -39,7 +35,7 @@ Cell* time_step(Cell *space)
   return out;
 }
 
-void calculate_nbhds(Cell *space, Collision *collision)
+void calculate_destinations(Cell *space, Collision *collision)
 {
   for (int i=0; i < SIZE; i++) {
     if (space[i].on) {
@@ -59,10 +55,6 @@ void calculate_nbhds(Cell *space, Collision *collision)
   }
 }
 
-void resolve_collision(Cell *space, Collision first_collision)
-{
-}
-
 void nullify(Cell *space, int i)
 {
   Cell *c = &(space[i]);
@@ -70,7 +62,4 @@ void nullify(Cell *space, int i)
   c->v = 0;
   c->a = 0;
   c->dest = -1;
-  c->nbhdOf = -1;
-  c->negCalculated = 0;
-  c->posCalculated = 0;
 }
