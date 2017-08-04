@@ -6,9 +6,8 @@ typedef struct Cell {
   int v;
   int a;
   int dest;
-  int nbhdOf;
-  int negCalculated;
-  int posCalculated;
+  int negNeighbour;
+  int posNeighbour;
 } Cell;
 
 typedef struct Collision {
