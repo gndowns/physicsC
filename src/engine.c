@@ -55,6 +55,7 @@ void calculate_destinations(Cell *space, Collision *collision)
   }
 }
 
+// the default setup for an empty cell
 void nullify(Cell *space, int i)
 {
   Cell *c = &(space[i]);
@@ -62,4 +63,5 @@ void nullify(Cell *space, int i)
   c->v = 0;
   c->a = 0;
   c->dest = -1;
+  c->posNeighbour = -1;
 }
