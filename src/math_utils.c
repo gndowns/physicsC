@@ -7,43 +7,34 @@ typedef struct Quadratic {
   int c;
 } Quadratic;
 
+Quadratic distance_quadratic(Quadratic, Quadratic);
 int calculate_roots(Quadratic, double *);
 void print(Quadratic);
 
 int main() {
-
-  Quadratic quad = {1, 1, 1};
-
-  double roots[2];
-  // example with imaginary roots
-  int res = calculate_roots(quad, roots);
-  printf("calculating roots for ");
-  print(quad);
-  printf("\n%d\n", res);
-
+  Quadratic q1 = {1, 8, 16};
+  Quadratic q2 = {1, 5, 6};
+  printf("calculating distance between:\n");
+  print(q1);
+  printf("\n");
+  print(q2);
   printf("\n");
 
-  // example with single real root
-  Quadratic single_real_root = {1, 8, 16};
-  printf("calculating roots for ");
-  print(single_real_root);
-  res = calculate_roots(single_real_root, roots);
-  printf("\n%d\n", res);
-  printf("first root: %f\n", roots[0]);
-  printf("second root: %f\n", roots[1]);
-
+  Quadratic q = distance_quadratic(q1, q2);
   printf("\n");
-
-  // example with two real roots
-  Quadratic real_roots = {1, 5, 6};
-  printf("calculating roots for ");
-  print(real_roots);
-  res = calculate_roots(real_roots, roots);
-  printf("\n%d\n", res);
-  printf("first root: %f\n", roots[0]);
-  printf("second root: %f\n", roots[1]);
-
+  print(q);
+  printf(" = d\n");
   return 0;
+}
+
+Quadratic distance_quadratic(Quadratic q1, Quadratic q2) {
+  Quadratic q;
+
+  q.a = q1.a - q2.a;
+  q.b = q1.b - q2.b;
+  q.c = q1.c - q2.c;
+
+  return q;
 }
 
 int calculate_roots(Quadratic q, double *roots) {
