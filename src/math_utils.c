@@ -1,31 +1,6 @@
 #include<stdio.h>
 #include<math.h>
-
-typedef struct Quadratic {
-  int a;
-  int b;
-  int c;
-} Quadratic;
-
-Quadratic distance_quadratic(Quadratic, Quadratic);
-int calculate_roots(Quadratic, double *);
-void print(Quadratic);
-
-int main() {
-  Quadratic q1 = {1, 8, 16};
-  Quadratic q2 = {1, 5, 6};
-  printf("calculating distance between:\n");
-  print(q1);
-  printf("\n");
-  print(q2);
-  printf("\n");
-
-  Quadratic q = distance_quadratic(q1, q2);
-  printf("\n");
-  print(q);
-  printf(" = d\n");
-  return 0;
-}
+#include "math_utils.h"
 
 Quadratic distance_quadratic(Quadratic q1, Quadratic q2) {
   Quadratic q;
@@ -54,7 +29,7 @@ int calculate_roots(Quadratic q, double *roots) {
   return 0;
 }
 
-void print(Quadratic q) {
+void print_quadratic(Quadratic q) {
   printf("%dx^2 + %dx + %d",
     q.a, q.b, q.c);
 }
