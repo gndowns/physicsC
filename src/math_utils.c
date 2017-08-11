@@ -6,6 +6,7 @@ typedef struct Quadratic {
   int c;
 } Quadratic;
 
+void get_roots(Quadratic, float *);
 void print(Quadratic);
 
 int main() {
@@ -15,7 +16,13 @@ int main() {
   print(quad);
   printf("\n");
 
+  float roots[2];
+  get_roots(quad, roots);
+
   return 0;
+}
+
+void get_roots(Quadratic q, float *roots) {
 }
 
 void print(Quadratic q) {
