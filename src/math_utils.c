@@ -7,7 +7,7 @@ typedef struct Quadratic {
   int c;
 } Quadratic;
 
-int get_roots(Quadratic, double *);
+int calculate_roots(Quadratic, double *);
 void print(Quadratic);
 
 int main() {
@@ -16,18 +16,29 @@ int main() {
 
   double roots[2];
   // example with imaginary roots
-  int res = get_roots(quad, roots);
+  int res = calculate_roots(quad, roots);
   printf("calculating roots for ");
   print(quad);
   printf("\n%d\n", res);
 
   printf("\n");
 
-  // example with real roots
-  Quadratic real_roots = {1, 8, 16};
+  // example with single real root
+  Quadratic single_real_root = {1, 8, 16};
+  printf("calculating roots for ");
+  print(single_real_root);
+  res = calculate_roots(single_real_root, roots);
+  printf("\n%d\n", res);
+  printf("first root: %f\n", roots[0]);
+  printf("second root: %f\n", roots[1]);
+
+  printf("\n");
+
+  // example with two real roots
+  Quadratic real_roots = {1, 5, 6};
   printf("calculating roots for ");
   print(real_roots);
-  res = get_roots(real_roots, roots);
+  res = calculate_roots(real_roots, roots);
   printf("\n%d\n", res);
   printf("first root: %f\n", roots[0]);
   printf("second root: %f\n", roots[1]);
@@ -35,7 +46,7 @@ int main() {
   return 0;
 }
 
-int get_roots(Quadratic q, double *roots) {
+int calculate_roots(Quadratic q, double *roots) {
   // quadratic formula
   // check if part under the radical is real
   float radicand = q.b * q.b - (4 * q.a * q.c);
