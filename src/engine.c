@@ -24,8 +24,9 @@ Cell* time_step(Cell *space)
   for (int i=0; i < SIZE; i++) {
     Cell p = space[i];
     if (p.dest != -1) {
-      out[p.dest] = p;
-      out[p.dest].dest = -1;
+      int j = p.dest;
+      out[j] = p;
+      out[j].dest = -1;
     }
   }
 
@@ -54,6 +55,8 @@ void calculate_destinations(Cell *space, Collision *collision)
       x = x < 0 ? 0 : x;
 
       p.dest = x;
+
+      space[i] = p;
     }
   }
 }
