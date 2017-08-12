@@ -86,16 +86,18 @@ void calculate_neighbours(Cell *space)
 
       // find next active particle
       j = i + 1;
-      Cell c = space[j];
-      while ( !c.on && j < SIZE) {
+      Cell *c = &(space[j]);
+      while ( !c->on && j < SIZE) {
         j++;
-        c = space[j];
+        c = &(space[j]);
       }
 
-      // leave as -1 if no particle found
       if (j < SIZE) {
+        // assign both neighbours
         p->posNeighbour = j;
+        c->negNeighbour = i;
       }
+      // leave as -1 if no particle found
 
       // increment to next active particle
       i = j - 1;
