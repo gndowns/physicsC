@@ -23,10 +23,23 @@ Cell* time_step(Cell *space)
   // move
   for (int i=0; i < SIZE; i++) {
     Cell p = space[i];
-    if (p.dest != -1) {
+
+    if (p.on) {
+      // update neighbours
+      if (p.negNeighbour != -1) {
+        int j = p.negNeighbour;
+        out[j].posNeighbour = p.dest;
+      }
+
+      if (p.posNeighbour != -1) {
+        int j = p.posNeighbour;
+        space[j].negNeighbour = p.dest;
+      }
+
+      // re-store
       int j = p.dest;
+      p.dest = -1;
       out[j] = p;
-      out[j].dest = -1;
     }
   }
 
