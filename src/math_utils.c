@@ -28,7 +28,7 @@ int calculate_roots(Quadratic q, double *roots) {
 
   // else, quadratic formula
   // check if part under the radical is real
-  float radicand = q.b * q.b - (4 * q.a * q.c);
+  double radicand = q.b * q.b - (4 * q.a * q.c);
   if (radicand < 0) {
     return -1;
   }

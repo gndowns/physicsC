@@ -7,7 +7,7 @@
 #include "term_1d_animate.h"
 
 int SIZE = 40;
-int FPS = 10;
+int FPS = 13;
 const int TIME = 1;
 
 int main(int argc, char **argv) {
