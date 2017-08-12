@@ -2,9 +2,9 @@
 #define MATH_UTILS_H
 
 typedef struct Quadratic {
-  int a;
-  int b;
-  int c;
+  double a;
+  double b;
+  double c;
 } Quadratic;
 
 Quadratic distance_quadratic(Quadratic, Quadratic);
