@@ -6,6 +6,7 @@ typedef struct Cell {
   int v;
   int a;
   int dest;
+  int negNeighbour;
   int posNeighbour;
 } Cell;
 

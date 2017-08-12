@@ -56,6 +56,7 @@ void calculate_destinations(Cell *space, Collision *collision)
 
       p.dest = x;
 
+      // update cell
       space[i] = p;
     }
   }
@@ -110,5 +111,6 @@ void nullify(Cell *space, int i)
   c->v = 0;
   c->a = 0;
   c->dest = -1;
+  c->negNeighbour = -1;
   c->posNeighbour = -1;
 }
