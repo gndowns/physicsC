@@ -28,6 +28,7 @@ Cell* time_step(Cell *space)
       out[p.dest].dest = -1;
     }
     // this will be deleted
+    // but for the life of me I don't remember why
     else if (p.on) {
       out[i] = p;
     }
@@ -64,7 +65,14 @@ void calculate_destinations(Cell *space, Collision *collision)
 
 int does_collide(Cell *p1, int i, Cell *p2, int j) {
   Quadratic q1 = {0.5 * p1->a, p1->v, -i};
-  return 0;
+  Quadratic q2 = {0.5 * p2->a, p2->v, -j};
+
+  Quadratic q = distance_quadratic(q1, q2);
+
+  double roots[2];
+  int res = calculate_roots(q, roots);
+
+  return res;
 }
 
 // should be done once for each board at init;
