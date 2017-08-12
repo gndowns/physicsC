@@ -30,6 +30,6 @@ int calculate_roots(Quadratic q, double *roots) {
 }
 
 void print_quadratic(Quadratic q) {
-  printf("%dx^2 + %dx + %d",
+  printf("%fx^2 + %fx + %f",
     q.a, q.b, q.c);
 }
