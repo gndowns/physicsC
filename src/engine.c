@@ -37,30 +37,30 @@ void calculate_destinations(Cell *space, Collision *collision)
   for (int i=0; i < SIZE; i++) {
     if (space[i].on) {
       // grab particle
-      Cell *p = &(space[i]);
+      Cell p = space[i];
 
       // check if collides with positive neighbour
-      if (p->posNeighbour != -1) {
-        Cell *nbhr = &(space[p->posNeighbour]);
-        int res = does_collide(p, i, nbhr, p->posNeighbour);
+      if (p.posNeighbour != -1) {
+        Cell nbhr = space[p.posNeighbour];
+        int res = does_collide(p, i, nbhr, p.posNeighbour);
       }
 
       // kinematics
-      int x = i + p->v * TIME + 0.5 * p->a * TIME * TIME;
-      p->v += p->a * TIME;
+      int x = i + p.v * TIME + 0.5 * p.a * TIME * TIME;
+      p.v += p.a * TIME;
 
       // keep in bounds
       x = x > (SIZE - 1) ? (SIZE - 1) : x;
       x = x < 0 ? 0 : x;
 
-      p->dest = x;
+      p.dest = x;
     }
   }
 }
 
-int does_collide(Cell *p1, int i, Cell *p2, int j) {
-  Quadratic q1 = {0.5 * p1->a, p1->v, -i};
-  Quadratic q2 = {0.5 * p2->a, p2->v, -j};
+int does_collide(Cell p1, int i, Cell p2, int j) {
+  Quadratic q1 = {0.5 * p1.a, p1.v, -i};
+  Quadratic q2 = {0.5 * p2.a, p2.v, -j};
 
   Quadratic q = distance_quadratic(q1, q2);
 
