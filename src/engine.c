@@ -27,11 +27,6 @@ Cell* time_step(Cell *space)
       out[p.dest] = p;
       out[p.dest].dest = -1;
     }
-    // this will be deleted
-    // but for the life of me I don't remember why
-    else if (p.on) {
-      out[i] = p;
-    }
   }
 
   return out;
