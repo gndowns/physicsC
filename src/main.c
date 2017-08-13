@@ -7,66 +7,25 @@
 #include "term_1d_animate.h"
 
 int SIZE = 40;
-int FPS = 10;
+int FPS = 13;
 const int TIME = 1;
 
 int main(int argc, char **argv) {
-  // parse command line arguments
-  int isDefaultSetupFlag = 0;
-  int isHorizontalFlag = 0;
-  char *sizeValue = NULL;
-  char *fpsValue = NULL;
-  int c;
-
-  // 3 possible command line options
-  // -d represents default single particle setup
-  // -r represents ho(r)izontal printing
-  // -s represents SIZE
-  while( (c = getopt(argc, argv, "drs:f:")) != -1)
-    switch(c)
-    {
-      case 'd':
-        isDefaultSetupFlag = 1;
-        break;
-      case 'r':
-        isHorizontalFlag = 1;
-        break;
-      case 's':
-        sizeValue = optarg;
-        break;
-      case 'f':
-        fpsValue = optarg;
-        break;
-    }
-
-  if (sizeValue) {
-    SIZE = strtol(sizeValue, NULL, 10);
-    printf("size value: %d\n", SIZE);
-  }
-  if (fpsValue) {
-    FPS = strtol(fpsValue, NULL, 10);
-    printf("fps value: %d\n", FPS);
-  }
-
   // init
   Cell *space = malloc( sizeof(Cell) * SIZE );
   for(int i=0; i < SIZE; i++) {
     nullify(space, i);
   }
 
-  // init particles
-  if(isDefaultSetupFlag) {
-    printf("Using default setup, 1 particle:\n");
-    printf("position: 0\nvelocity: +8\nacceleration: -1\n");
-    space[0].on = 1;
-    space[0].v = 8;
-    space[0].a = -1;
-  }
-  else {
-    create_particles(space);
-  }
+  printf("Using default setup, 1 particle:\n");
+  printf("position: 0\nvelocity: +8\nacceleration: -1\n");
+  printf("FPS: %d\n", FPS);
+  printf("Time Step: %d\n", TIME);
+  space[0].on = 1;
+  space[0].v = 8;
+  space[0].a = -1;
 
-  char orientation = isHorizontalFlag ? 'r' : 'u';
+  char orientation = 'u';
   animate(space, orientation);
 
   free(space);
