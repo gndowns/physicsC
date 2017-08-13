@@ -19,7 +19,7 @@ int calculate_roots(Quadratic q, double *roots) {
   }
   // check if linear equation
   else if (q.a == 0) {
-    int res = -q.c / q.b;
+    double res = -q.c / q.b;
     roots[0] = res;
     roots[1] = res;
 

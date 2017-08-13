@@ -56,7 +56,16 @@ void calculate_destinations(Cell *space, Collision *collision)
       // check if collides with positive neighbour
       if (p.posNeighbour != -1) {
         Cell nbhr = space[p.posNeighbour];
-        int res = does_collide(p, i, nbhr, p.posNeighbour);
+        double roots[2];
+        int res = does_collide(p, i, nbhr, p.posNeighbour, roots);
+
+        if (roots[0] >=0 && roots[0] <= TIME) {
+          // collision this frame
+        }
+        else if (roots[1] >=0 && roots[1] <= TIME) {
+          // collision ths frame
+        }
+
       }
 
       // kinematics
@@ -75,13 +84,12 @@ void calculate_destinations(Cell *space, Collision *collision)
   }
 }
 
-int does_collide(Cell p1, int i, Cell p2, int j) {
-  Quadratic q1 = {0.5 * p1.a, p1.v, -i};
-  Quadratic q2 = {0.5 * p2.a, p2.v, -j};
+int does_collide(Cell p1, int i, Cell p2, int j, double *roots) {
+  Quadratic q1 = {0.5 * p1.a, p1.v, i};
+  Quadratic q2 = {0.5 * p2.a, p2.v, j};
 
   Quadratic q = distance_quadratic(q1, q2);
 
-  double roots[2];
   int res = calculate_roots(q, roots);
 
   return res;
