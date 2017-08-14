@@ -11,19 +11,31 @@ int FPS = 13;
 const int TIME = 1;
 
 int main(int argc, char **argv) {
+  // -c flag for load from config file
+  char *configFilePath = NULL;
+  int c;
+
+  while ( (c = getopt(argc, argv, "c:")) != -1) {
+    configFilePath = optarg;
+    break;
+  }
+
+  if (configFilePath) {
+    FILE *f = fopen("config.json", "r");
+    fseek(f, 0, SEEK_END);
+    long length = ftell(f);
+    fseek(f, 0, SEEK_SET);
+    char *buffer = malloc(length);
+    fread(buffer, length, 1, f);
+    printf("%s", buffer);
+  }
+
   // init
   Cell *space = malloc( sizeof(Cell) * SIZE );
   for(int i=0; i < SIZE; i++) {
     nullify(space, i);
   }
 
-  FILE *f = fopen("config.json", "r");
-  fseek(f, 0, SEEK_END);
-  long length = ftell(f);
-  fseek(f, 0, SEEK_SET);
-  char *buffer = malloc(length);
-  fread(buffer, length, 1, f);
-  /* printf("%s", buffer); */
 
   printf("Using default setup, 1 particle:\n");
   printf("position: 0\nvelocity: +8\nacceleration: -1\n");
