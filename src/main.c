@@ -17,6 +17,14 @@ int main(int argc, char **argv) {
     nullify(space, i);
   }
 
+  FILE *f = fopen("config.json", "r");
+  fseek(f, 0, SEEK_END);
+  long length = ftell(f);
+  fseek(f, 0, SEEK_SET);
+  char *buffer = malloc(length);
+  fread(buffer, length, 1, f);
+  /* printf("%s", buffer); */
+
   printf("Using default setup, 1 particle:\n");
   printf("position: 0\nvelocity: +8\nacceleration: -1\n");
   printf("FPS: %d\n", FPS);
