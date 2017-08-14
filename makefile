@@ -1,10 +1,26 @@
 CC=gcc
-DEPS= src/main.h src/engine.h src/term_1d_animate.h src/math_utils.h
+
+INCDIR = include
+CFLAGS = -I $(INCDIR)
+
 SRC= src
-OBJ= obj
 
-$(OBJ)/%.o: $(SRC)/%.c $(DEPS)
-	$(CC) -c $< -o $@
+OBJDIR = src/obj
 
-main: $(OBJ)/main.o $(OBJ)/engine.o $(OBJ)/term_1d_animate.o $(OBJ)/math_utils.o
-	$(CC) $(OBJ)/main.o $(OBJ)/engine.o $(OBJ)/term_1d_animate.o $(OBJ)/math_utils.o
+_DEPS= main.h engine.h term_1d_animate.h math_utils.h cJSON.h
+DEPS = $(patsubst %,$(INCDIR)/%,$(_DEPS))
+
+_OBJ= main.o engine.o term_1d_animate.o math_utils.o cJSON.o
+OBJ = $(patsubst %,$(OBJDIR)/%,$(_OBJ))
+
+
+$(OBJDIR)/%.o: $(SRC)/%.c $(DEPS)
+	$(CC) -c $< -o $@ $(CFLAGS)
+
+sim: $(OBJ)
+	$(CC) $^ $(CFLAGS)
+
+.PHONY: clean
+
+clean:
+	rm -f $(OBJDIR)/*.o
