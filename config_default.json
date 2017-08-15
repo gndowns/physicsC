@@ -1,0 +1,10 @@
+{
+  "size": 15,
+  "particles": [
+    {
+      "position": 0,
+      "velocity": 8,
+      "acceleration": -1
+    }
+  ]
+}

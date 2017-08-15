@@ -6,8 +6,11 @@
 #include "engine.h"
 #include "term_1d_animate.h"
 
-int SIZE = 40;
-int FPS = 13;
+// DEFAULTS
+int SIZE = 0;
+int FPS = 1;
+Cell *PARTICLES;
+
 const int TIME = 1;
 
 int main(int argc, char **argv) {
@@ -15,18 +18,18 @@ int main(int argc, char **argv) {
   char *configFilePath = NULL;
   int c;
 
-  while ( (c = getopt(argc, argv, "c:")) != -1) {
+  if ( (c = getopt(argc, argv, "c:")) != -1) {
     configFilePath = optarg;
-    break;
   }
 
   if (configFilePath) {
-    FILE *f = fopen("config.json", "r");
+    FILE *f = fopen(configFilePath, "r");
     fseek(f, 0, SEEK_END);
     long length = ftell(f);
     fseek(f, 0, SEEK_SET);
     char *buffer = malloc(length);
     fread(buffer, length, 1, f);
+    fclose(f);
     printf("%s", buffer);
   }
 
@@ -35,15 +38,6 @@ int main(int argc, char **argv) {
   for(int i=0; i < SIZE; i++) {
     nullify(space, i);
   }
-
-
-  printf("Using default setup, 1 particle:\n");
-  printf("position: 0\nvelocity: +8\nacceleration: -1\n");
-  printf("FPS: %d\n", FPS);
-  printf("Time Step: %d\n", TIME);
-  space[0].on = 1;
-  space[0].v = 8;
-  space[0].a = -1;
 
   char orientation = 'u';
   animate(space, orientation);
